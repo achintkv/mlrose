@@ -140,8 +140,8 @@ class TestAlgorithms(unittest.TestCase):
         problem"""
 
         problem = DiscreteOpt(5, OneMax(), maximize=True)
-        best_state, best_fitness = simulated_annealing(problem,
-                                                       max_attempts=50)
+        best_state, best_fitness, fitness_curve = simulated_annealing(problem,
+                                                       max_attempts=50, curve=True, max_iters=1000)
 
         x = np.array([1, 1, 1, 1, 1])
 
