@@ -135,6 +135,37 @@ class TestAlgorithms(unittest.TestCase):
         assert best_fitness == 1
 
     @staticmethod
+    def test_random_hill_climb_curve_length_max_iters():
+        """Test random_hill_climb function such that when curve is True for ma_iters
+        the length of all fitness scores should be equal to max_iters"""
+
+        problem = DiscreteOpt(5, OneMax(), maximize=True)
+        x = np.array([0, 0, 0, 0, 0])
+
+        max_iters= 300
+
+        best_state, best_fitness, all_fitness = random_hill_climb(problem,
+                                                     max_iters=max_iters, restarts=0,
+                                                     init_state=x, curve=True)
+        assert len(all_fitness) == max_iters
+
+
+    @staticmethod
+    def test_random_hill_climb_curve_length_max_attempts():
+        """Test random_hill_climb function such that when curve is True for ma_iters
+        the length of all fitness scores should be equal to max_iters"""
+
+        problem = DiscreteOpt(5, OneMax(), maximize=True)
+        x = np.array([0, 0, 0, 0, 0])
+
+        max_attempts = 10
+
+        best_state, best_fitness, all_fitness = random_hill_climb(problem,
+                                                                  max_attempts=max_attempts, restarts=0,
+                                                                  init_state=x, curve=True)
+        assert len(all_fitness) != max_attempts
+
+    @staticmethod
     def test_simulated_annealing_discrete_max():
         """Test simulated_annealing function for a discrete maximization
         problem"""
@@ -201,6 +232,36 @@ class TestAlgorithms(unittest.TestCase):
         assert best_fitness == 1
 
     @staticmethod
+    def test_simulated_annealing_curve_length_max_iters():
+        """Test random_hill_climb function such that when curve is True for ma_iters
+        the length of all fitness scores should be equal to max_iters"""
+
+        problem = DiscreteOpt(5, OneMax(), maximize=True)
+        x = np.array([0, 0, 0, 0, 0])
+
+        max_iters = 300
+
+        best_state, best_fitness, all_fitness = simulated_annealing(problem,
+                                                                  max_iters=max_iters,
+                                                                  init_state=x, curve=True)
+        assert len(all_fitness) == max_iters
+
+    @staticmethod
+    def test_simulated_annealing_curve_length_max_attempts():
+        """Test random_hill_climb function such that when curve is True for ma_iters
+        the length of all fitness scores should be equal to max_iters"""
+
+        problem = DiscreteOpt(5, OneMax(), maximize=True)
+        x = np.array([0, 0, 0, 0, 0])
+
+        max_attempts = 10
+
+        best_state, best_fitness, all_fitness = simulated_annealing(problem,
+                                                                  max_attempts=max_attempts,
+                                                                  init_state=x, curve=True)
+        assert len(all_fitness) != max_attempts
+
+    @staticmethod
     def test_genetic_alg_discrete_max():
         """Test genetic_alg function for a discrete maximization problem"""
 
@@ -265,6 +326,30 @@ class TestAlgorithms(unittest.TestCase):
         x = np.array([0, 0, 0, 0, 0])
 
         assert (np.array_equal(best_state, x) and best_fitness == 0)
+
+    @staticmethod
+    def test_mimic_curve_length_max_iters():
+        """Test random_hill_climb function such that when curve is True for ma_iters
+        the length of all fitness scores should be equal to max_iters"""
+
+        problem = DiscreteOpt(5, OneMax(), maximize=True)
+
+        max_iters = 300
+
+        best_state, best_fitness, all_fitness = mimic(problem, max_iters=max_iters,curve=True)
+        assert len(all_fitness) == max_iters
+
+    @staticmethod
+    def test_mimic_curve_length_max_attempts():
+        """Test random_hill_climb function such that when curve is True for ma_iters
+        the length of all fitness scores should be equal to max_iters"""
+
+        problem = DiscreteOpt(5, OneMax(), maximize=True)
+
+        max_attempts = 10
+
+        best_state, best_fitness, all_fitness = simulated_annealing(problem, max_attempts=max_attempts, curve=True)
+        assert len(all_fitness) != max_attempts
 
 
 if __name__ == '__main__':
